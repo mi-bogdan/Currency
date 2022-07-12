@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{% url 'index' %}" method="post">
+    {% csrf_token %}
+    {{forms.non_field.errors}}
+    <div class="card text-center  col-md-8 mx-auto mycl">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Конвертатор</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'list' %}">Список операций</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Конвертер валют к RUB</h5>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="number" class="form-control myformcl" placeholder="Введите число"
+                                name="from_amount">
+                        </div>
+                        <div class="col">
+                            <select class="form-select myformcl" value="from_curr" name="from_curr">
+                                <option selected>Из какой валюты</option>
+                                {% for item in currency %}
+                                <option value="{{item}}">{{item}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-select myformcl" value="to_curr" name="to_curr">
+                                <option selected>В какую валюту</option>
+                                {% for item in currency %}
+                                <option value="{{item}}">{{item}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-primary ">Конвертировать</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    {% if converted_amount %}
+                    <div class="result_block">
+                        <p>Отдаем {{from_amount}} {{from_curr}} </p>
+                        <p>Получаем {{converted_amount}} {{to_curr}}</p>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+</form>
+{% endblock %}

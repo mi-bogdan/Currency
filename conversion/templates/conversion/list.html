@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Число</th>
+        <th scope="col">В какую валюту</th>
+        <th scope="col">Получаете</th>
+        <th scope="col">Дата конвертации</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in valutes %}
+      <tr>
+        <th scope="row">{{item.pk}}</th>
+        <td>{{item.from_amount}} {{item.from_curr}}</td>
+        <td>{{item.to_curr}}</td>
+        <td>{{item.converted_amount}} {{item.to_curr}}</td>
+        <td>{{item.data_converted}}</td>
+      </tr>
+      {% endfor %}
+ 
+  
+   
+    </tbody>
+  </table>
+
+{% endblock %}
